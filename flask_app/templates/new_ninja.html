@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Ninja</title>
+</head>
+<body>
+    <h3>New Ninja:</h3>
+    {% for ninja in ninjas %}
+        <p>{{ninja.first_name}} by {{ninja.last_name}}</p>
+    {% endfor %}
+    <div>
+        <p><a href="/"> Home</a></p>
+    </div>
+</body>
+</html>

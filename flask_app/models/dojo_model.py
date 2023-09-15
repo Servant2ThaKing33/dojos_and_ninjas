@@ -1,4 +1,4 @@
-from config.mysqlconnection import connectToMySQL
+from flask_app.config.mysqlconnection import connectToMySQL
 
 
 class dojo:
@@ -8,6 +8,11 @@ class dojo:
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
+        @classmethod
+        def save(cls, data):
+            query = "INSERT INTO dojo (name, created_at, updated_at) VALUES (%(name)s, NOW(), NOW());"
+            result = connectToMySQL('mydb').query_db(query,data)
+            return result
         
     @classmethod
     def get_all(cls):
@@ -15,5 +20,12 @@ class dojo:
         results = connectToMySQL('dojos_and_ninjas').query_db(query)
         dojos = []
         for dojos in results:
-            dojos.append(cls(dojos))
+            dojos.append(cls(dojo))
         return dojos
+    
+    @classmethod
+    def get_one(cls,data):
+        query = "SELECT * FROM ninjas WHERE dojo_id = %(dojo_id)s;"
+        results = connectToMySQL(cls.db).query_db(query,data)
+        if results == False:
+            return False
