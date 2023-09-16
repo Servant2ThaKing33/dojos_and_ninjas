@@ -11,13 +11,13 @@ class dojo:
         @classmethod
         def save(cls, data):
             query = "INSERT INTO dojo (name, created_at, updated_at) VALUES (%(name)s, NOW(), NOW());"
-            result = connectToMySQL('mydb').query_db(query,data)
+            result = connectToMySQL('dojo_ninja').query_db(query,data)
             return result
         
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM dojos;"
-        results = connectToMySQL('dojos_and_ninjas').query_db(query)
+        results = connectToMySQL('dojo_ninja').query_db(query)
         dojos = []
         for dojos in results:
             dojos.append(cls(dojo))

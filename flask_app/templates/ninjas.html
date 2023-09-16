@@ -7,16 +7,15 @@
     <title>New Ninjas</title>
 </head>
 <body>
-    <form>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{}}
-            </button>
-            <ul class="dropdown-menu">
-            <li><a class="dropdown-item">{{}}</a></li>
-            <li><a class="dropdown-item">{{}}</a></li>
-            <li><a class="dropdown-item">{{}}</a></li>
-            </ul>
+    <form action="/ninja/create" method="POST" class="col-6 bg-dark">
+        <h2 class="text-center text-primary">New Ninja</h2>
+        <div class="form-group text-primary">
+            <label for="dojo">Ninja:</label>
+            <select name="dojo_id" class="form-control">
+                {% for d in dojo %}
+                <option value="{{d.id}}">{{d.name}}</option>
+                {% endfor %}
+            </select>
         </div>
     </form>
 </body>

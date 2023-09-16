@@ -1,40 +1,25 @@
 #only deals with routes as controllers
 from flask import render_template, redirect, request, session
 from flask_app import app
-from flask_app.models.dojo_model import dojo
 from flask_app.models.ninja_model import ninja
 
-@app.route('/ninjas')
-def ninjas():
-    return render_template("ninjas.html", ninjas=ninjas.get_all())
-
-@app.route("/")
+@app.route('/')
 def index():
-    # call the get all classmethod to get all friends
-    #ninjas = ninjas()
-    #print(ninjas)
-    return render_template("dojos.html")
+    return render_template("index.html")
+
+@app.route('/ninja')
+def ninjas():
+    return render_template("ninjas.html", ninjas=ninjas)
 
 
-
-@app.route('/show')
-def show():
-    return render_template("ninjas.html", dojo=dojo)
-
-@app.route('/new')
-def new_ninja():
-    return render_template("new_ninja.html", ninja=ninja)
-
-
-@app.route('/register',methods=['POST'])
-def register():
+@app.route('/ninja/create', methods=['POST'])
+def create():
+    ninja.save(request.form)
     data ={ 
-        "first_name": request.form['first_name'],
-        "last_name": request.form['last_name'],
-        "age": request.form['age'],
+        'name': request.form['name']
     }
-    id = ninja.save(data)
-    return redirect('/Homescreen')
+    ninja.id =  ninja.save(data)
+    return redirect("ninja.html",ninja=ninja)
 
 #@app.route('/ninja/new', methods = ["GET"])
 #def new():
