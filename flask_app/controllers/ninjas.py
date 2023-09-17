@@ -1,7 +1,7 @@
 #only deals with routes as controllers
 from flask import render_template, redirect, request, session
 from flask_app import app
-from flask_app.models.ninja_model import ninja
+from flask_app.models.ninja_model import Ninja
 
 @app.route('/')
 def index():
@@ -14,12 +14,12 @@ def ninjas():
 
 @app.route('/ninja/create', methods=['POST'])
 def create():
-    ninja.save(request.form)
-    data ={ 
-        'name': request.form['name']
+    data = {
+        "first_name": request.form["first_name"]
+
     }
-    ninja.id =  ninja.save(data)
-    return redirect("ninja.html",ninja=ninja)
+    Ninja.save(data)
+    return redirect("index.html",ninja=Ninja)
 
 #@app.route('/ninja/new', methods = ["GET"])
 #def new():

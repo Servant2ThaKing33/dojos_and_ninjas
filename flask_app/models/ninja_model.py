@@ -1,7 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 
 
-class ninja:
+class Ninja:
     def __init__( self , data ):
         self.id = data['id']
         self.first_name = data['first_name']
@@ -12,13 +12,13 @@ class ninja:
     @classmethod
     def save(cls, data):
         query = "INSERT INTO ninja (first_name, last_name, age, created_at, updated_at) VALUES (%(first_name)s, %(last_name)s, %(age)s, NOW(), NOW());"
-        result = connectToMySQL('dojo_ninja').query_db(query,data)
+        result = connectToMySQL('dojos_ninjas').query_db(query,data)
         return result
 
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM ninjas;"
-        results = connectToMySQL('dojo_ninja').query_db(query)
+        results = connectToMySQL('dojos_ninjas').query_db(query)
         ninjas = []
         for ninjas in results:
             ninjas.append(cls(ninja))

@@ -15,8 +15,22 @@
                 {% for d in dojo %}
                 <option value="{{d.id}}">{{d.name}}</option>
                 {% endfor %}
+                <input class="btn btn-primary" type="submit" value="Add Ninja">
             </select>
         </div>
+    </form>
+
+    <form action="/ninja/create" method="POST">
+        <label for="cars">Dojo</label>
+        <select name="dojo" id="cars">
+        {% for d in dojo %}
+        <option value="{{d.id}}">{{d.name}}</option>
+        <option value="{{d.id}}">{{d.name}}</option>
+        <option value="{{d.id}}">{{d.name}}</option>
+        {% endfor %}
+        </select>
+        <br><br>
+        <input type="submit" value="Add Ninja">
     </form>
 </body>
 </html>
